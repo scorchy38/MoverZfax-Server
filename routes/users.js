@@ -3,14 +3,17 @@ const router = express.Router();
 const passport = require('passport');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+var bodyParser = require('body-parser')
 
-router.get('/login', (req, res)=> res.render('login'));
+var jsonParser = bodyParser.json()
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// router.get('/login', (req, res)=> res.render('login'));
+//
+// router.get('/register', (req, res)=> res.render('register'));
 
-router.get('/register', (req, res)=> res.render('register'));
-
-router.post('/register', (req, res) => {
+router.post('/register', urlencodedParser, (req, res) => {
   const { name, email, password, password2 } = req.body;
-  console.log(req.body);
+  console.log(name);
   let errors = [];
 
     if (!name || !email || !password || !password2) {
@@ -21,30 +24,24 @@ router.post('/register', (req, res) => {
       errors.push({ msg: 'Passwords do not match' });
     }
 
-    if (password.length < 6) {
-      errors.push({ msg: 'Password must be at least 6 characters' });
-    }
+    // if (password.length < 6) {
+    //   errors.push({ msg: 'Password must be at least 6 characters' });
+    // }
 
     if (errors.length > 0) {
       console.log(req.body);
-      res.render('register', {
-        errors,
-        name,
-        email,
-        password,
-        password2
-      });
+      // res.render('register', {
+      //   errors,
+      //   name,
+      //   email,
+      //   password,
+      //   password2
+      // });
     }else {
     User.findOne({ email: email }).then(user => {
       if (user) {
         errors.push({ msg: 'Email already exists' });
-        res.render('register', {
-          errors,
-          name,
-          email,
-          password,
-          password2
-        });
+        res.send('Email exist');
       } else {
         const newUser = new User({
           name,
@@ -59,11 +56,12 @@ router.post('/register', (req, res) => {
             newUser
               .save()
               .then(user => {
-                req.flash(
-                  'success_msg',
-                  'You are now registered and can log in'
-                );
-                res.redirect('login');
+                console.log(name);
+                // req.flash(
+                //   'success_msg',
+                //   'You are now registered and can log in'
+                // );
+                // res.redirect('login');
               })
               .catch(err => console.log(err));
           });
@@ -73,16 +71,12 @@ router.post('/register', (req, res) => {
   }
 });
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: 'login',
-    failureFlash: true
-  })(req, res, next);
+  passport.authenticate('local')(req, res, next);
 });
 router.get('/logout', (req, res) => {
   req.logout();
-  req.flash('success_msg', 'You are logged out');
-  res.redirect('login');
+  // req.flash('success_msg', 'You are logged out');
+  // res.redirect('login');
 });
 
 module.exports = router;

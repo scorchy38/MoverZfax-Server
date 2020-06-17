@@ -4,9 +4,9 @@ const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 
-router.get('/', (req, res)=> res.render('welcome'));
+// router.get('/', (req, res)=> res.render('welcome'));
 router.get('/dashboard', ensureAuthenticated, (req, res) =>
-  res.render('dashboard', {
+  res.send({
     user: req.user
   })
 );
