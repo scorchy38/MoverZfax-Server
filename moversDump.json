@@ -1,0 +1,92 @@
+[
+  {
+  "_id": {
+    "$oid": "5ee9ee55cf5aca3cdaff82be"
+  },
+  "moverName": "Pace Movers",
+  "moverUSDOTNo": "12345",
+  "moverPhno": "+917060222315",
+  "moverRating": "5",
+  "moverMCNo": "234555",
+  "moverDescription": "Best Movers In Town",
+  "moverCountry":"USA",
+  "moverState":"New Mexico",
+  "moverCity":"Los Santos",
+  "moverZipCode":"243001"
+},
+{
+"_id": {
+  "$oid": "5ee9ee55cf5aca3cdaff82b1"
+},
+"moverName": "Ride Movers",
+"moverUSDOTNo": "1234235",
+"moverPhno": "+917060222315",
+"moverRating": "4.5",
+"moverMCNo": "234532455",
+"moverDescription": "Best Movers In Town",
+"moverCountry":"USA",
+"moverState":"New Mexico",
+"moverCity":"Los Santos",
+  "moverZipCode":"243001"
+},
+{
+"_id": {
+  "$oid": "5ee9ee55cf5aca3cdaff82b2"
+},
+"moverName": "Ace Movers",
+"moverUSDOTNo": "123145",
+"moverPhno": "+917060222315",
+"moverRating": "3",
+"moverMCNo": "23466555",
+"moverDescription": "Best Movers In Town",
+"moverCountry":"USA",
+"moverState":"New Mexico",
+"moverCity":"Los Santos",
+  "moverZipCode":"243001"
+},
+{
+"_id": {
+  "$oid": "5ee9ee55cf5aca3cdaff82b3"
+},
+"moverName": "Like Movers",
+"moverUSDOTNo": "12256345",
+"moverPhno": "+917060222315",
+"moverRating": "3.5",
+"moverMCNo": "2341555",
+"moverDescription": "Best Movers In Town",
+"moverCountry":"USA",
+  "moverState":"New Mexico",
+  "moverCity":"Los Santos",
+    "moverZipCode":"243001"
+},
+{
+"_id": {
+  "$oid": "5ee9ee55cf5aca3cdaff82b4"
+},
+"moverName": "Heavy Duty Movers",
+"moverUSDOTNo": "1234905",
+"moverPhno": "+917060222315",
+"moverRating": "5",
+"moverMCNo": "234511155",
+"moverDescription": "Best Movers In Town",
+"moverCountry":"USA",
+"moverState":"New Mexico",
+"moverCity":"Los Santos",
+  "moverZipCode":"243001"
+},
+{
+"_id": {
+  "$oid": "5ee9ee55cf5aca3cdaff82b5"
+},
+"moverName": "Dada Movers",
+"moverUSDOTNo": "121345345",
+"moverPhno": "+917060222315",
+"moverRating": "2",
+"moverMCNo": "234521155",
+"moverDescription": "Best Movers In Town",
+"moverCountry":"USA",
+"moverState":"New Mexico",
+"moverCity":"Los Santos",
+"moverZipCode":"243001"
+}
+]
