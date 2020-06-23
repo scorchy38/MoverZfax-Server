@@ -1,68 +1,75 @@
-const express = require ('express');
-const mongoose = require('mongoose')
+const express = require('express');
 const router = express.Router();
-const Post = require('../models/post');
-var bodyParser = require('body-parser')
+
 var mongodb = require('mongodb');
+
 var mongoClient = mongodb.MongoClient;
+// var url = "mongodb://localhost:27017/";
+var url = "mongodb+srv://shubhsaras:shubhsaras38@moverzfax.2op18.mongodb.net/<dbname>?retryWrites=true&w=majority";
+//Basic root route
+router.get('/', (req, res) => {
+  res.send('We are on posts');
+});
 
-const app = express();
+//To create a document
+router.post('/addSingle', (req, res) => {
 
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-
-router.post('/post', urlencodedParser, (req, res) => {
-  const { id, fullName, currAdd, currDropdownValue, currDropdownValue1, currDropdownValue2, currZip, destDropdownValue, destDropdownValue1, destDropdownValue2, destZip} = req.body;
-  console.log(fullName);
-  mongoClient.connect('mongodb+srv://shubhsaras:shubhsaras38@moverzfax.2op18.mongodb.net/moverzFax?retryWrites=true&w=majority', { useUnifiedTopology: true },function(err, databases) {
+  mongoClient.connect(url, { useUnifiedTopology: true },function(err, databases) {
     if (err) {
       throw err;
     }
     var nodetestDB = databases.db("moverzFax"); //here
     var postCollection = nodetestDB.collection("posts");
-    const newPost = {
-    'id':id,
-    'fullName':fullName,
-    'currAdd':currAdd,
-    'currDropdownValue':currDropdownValue,
-    'currDropdownValue1':currDropdownValue1,
-    'currDropdownValue2':currDropdownValue2,
-    'currZip':currZip,
-    'destDropdownValue':destDropdownValue,
-    'destDropdownValue1':destDropdownValue1,
-    'destDropdownValue2':destDropdownValue2,
-    'destZip':destZip
-  };
-  postCollection.insertOne(newPost, function(error, response) {
+
+    var post = {
+      userEmail:req.body.userEmail,
+    fullName:req.body.fullName,
+    currAdd:req.body.currAdd,
+    currCountry:req.body.currCountry,
+    currState:req.body.currState,
+    currCity:req.body.currCity,
+    currZip:req.body.currZip,
+    destAdd:req.body.destAdd,
+    destCountry:req.body.destCountry,
+    destState:req.body.destState,
+    destCity:req.body.destCity,
+    destZip:req.body.destZip
+    };
+
+
+    postCollection.insertOne(post, function(error, response) {
       if (error) {
         throw error;
       }
 
+      console.log("1 document inserted");
+      res.send('! document inserted');
+      databases.close();
+    });
+  });
 
-  console.log("1 document inserted");
-  res.send('done');
-  databases.close();
-});
 });
 
-});
 
-router.post('/getData', (req, res) => {
-  mongoClient.connect('mongodb+srv://shubhsaras:shubhsaras38@moverzfax.2op18.mongodb.net/moverzFax?retryWrites=true&w=majority', { useUnifiedTopology: true },function(error, databases) {
+//to find multiple documents of a particular userEmail
+router.post('/findMultiple', (req, res) => {
+  mongoClient.connect(url,{ useUnifiedTopology: true }, function(error, databases) {
     if (error) {
       throw error;
 
     }
+
     var nodtst = databases.db("moverzFax");
+    nodtst.collection("posts").find({
+      userEmail: req.body.userEmail
+    }).toArray(function(err, totalposts) {
+      if (err) throw err;
 
-    nodtst.collection("posts").findOne({
-        id : req.body.id
-    }, function(err, result) {
-
-      console.log("one record is found....." + result.fullName);
-      res.send(result);
-      databases.close();
+      for (i = 0; i < totalposts.length; i++) {
+        let post = totalposts[i];
+        console.log(post.userEmail);
+      }
+      res.send(totalposts);
     });
   });
 });
