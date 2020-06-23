@@ -77,7 +77,7 @@ router.post('/login', (req, res, next) => {
     if (!user) { return res.send('Something went wrong.'); }
     req.logIn(user, function(err) {
       if (err) { return res.send('Something went wrong.'); }
-      return res.send('Signed in!!');
+      return res.send(user.id);
     });
   })(req, res, next);
 

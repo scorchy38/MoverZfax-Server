@@ -13,7 +13,7 @@ require('./config/passport')(passport);
 
 mongoose
   .connect(
-    'mongodb+srv://shubhsaras:shubhsaras@test-bek24.gcp.mongodb.net/test?retryWrites=true&w=majority',
+    'mongodb+srv://shubhsaras:shubhsaras38@moverzfax.2op18.mongodb.net/moverzFax?retryWrites=true&w=majority',
     { useNewUrlParser: true ,useUnifiedTopology: true}
   )
   .then(() => console.log('MongoDB Connected'))
@@ -38,6 +38,7 @@ app.use(passport.session());
 // });
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/users'));
+app.use('/', require('./routes/posts'));
 // app.use(expressLayouts);
 // app.set('view engine', 'ejs');
 
