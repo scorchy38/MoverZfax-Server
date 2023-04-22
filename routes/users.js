@@ -41,7 +41,7 @@ router.post('/register', urlencodedParser, (req, res) => {
     User.findOne({ email: email }).then(user => {
       if (user) {
         errors.push({ msg: 'Email already exists' });
-        res.send('Email exist');
+        res.send('Email already exists!!');
       } else {
         const newUser = new User({
           name,
@@ -56,6 +56,7 @@ router.post('/register', urlencodedParser, (req, res) => {
             newUser
               .save()
               .then(user => {
+                res.send('Sign Up Successful. You can login now.');
                 console.log(name);
                 // req.flash(
                 //   'success_msg',
@@ -71,10 +72,19 @@ router.post('/register', urlencodedParser, (req, res) => {
   }
 });
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local')(req, res, next);
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.send('Something went wrong.'); }
+    req.logIn(user, function(err) {
+      if (err) { return res.send('Something went wrong.'); }
+      return res.send('Signed in!!');
+    });
+  })(req, res, next);
+
 });
 router.get('/logout', (req, res) => {
   req.logout();
+  res.send('Logged out!!');
   // req.flash('success_msg', 'You are logged out');
   // res.redirect('login');
 });
