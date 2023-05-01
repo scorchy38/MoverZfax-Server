@@ -43,6 +43,7 @@ router.post('/addSingle', (req, res) => {
       }
 
       console.log("1 document inserted");
+      console.log(response);
       res.send('! document inserted');
       databases.close();
     });
@@ -65,7 +66,7 @@ router.post('/findMultiple', (req, res) => {
     }).toArray(function(err, totalposts) {
       if (err) throw err;
 
-      for (i = 0; i < totalposts.length; i++) {
+      for (var i = 0; i < totalposts.length; i++) {
         let post = totalposts[i];
         console.log(post.userEmail);
       }
