@@ -22,7 +22,7 @@ mongoose.connect('mongodb+srv://shubhsaras:shubhsaras38@moverzfax.2op18.mongodb.
   console.log('Success');
 
 })
-const PORT = process.env.PORT || 5000;
+const PORT = 5005;
 
 app.listen(PORT,  console.log(`Server started on port ${PORT}`));
 // https://whispering-meadow-64251.herokuapp.com/ | https://git.heroku.com/whispering-meadow-64251.git
