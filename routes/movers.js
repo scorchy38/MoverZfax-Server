@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/post');
+require('../models/post');
 
 var mongodb = require('mongodb');
 
@@ -20,7 +20,8 @@ router.get('/createDatabase', (req, res) => {
       throw error;
 
     }
-    var dbobject = databases.db('moverzFax'); //use for create database
+    console.log(req, res);
+    databases.db('moverzFax'); //use for create database
     console.log("database is created")
     databases.close();
 
@@ -42,6 +43,7 @@ router.get('/createCollection', (req, res) => {
       }
 
       console.log("collection is created.....")
+      console.log(req, res, response);
       databases.close();
     });
   });
@@ -75,6 +77,7 @@ router.post('/addSingle', (req, res) => {
       }
 
       console.log("1 document inserted");
+      console.log(response);
       res.send('! document inserted');
       databases.close();
     });
@@ -98,6 +101,7 @@ router.post('/addMultiple', (req, res) => {
         throw error;
 
       }
+      console.log(response);
       console.log("Numnber of document is inserted.........");
       res.send('Many Document Created');
     })
@@ -180,7 +184,7 @@ router.post('/findmultiple', (req, res) => {
     }).toArray(function(err, totalposts) {
       if (err) throw err;
 
-      for (i = 0; i < totalposts.length; i++) {
+      for (var i = 0; i < totalposts.length; i++) {
         let post = totalposts[i];
         console.log(post.moverName + ", " + post.moverDescription);
       }
@@ -208,7 +212,7 @@ router.post('/detailedSearchWithoutUSDOT', (req, res) => {
     }).toArray(function(err, totalposts) {
       if (err) throw err;
 
-      for (i = 0; i < totalposts.length; i++) {
+      for (var i = 0; i < totalposts.length; i++) {
         let post = totalposts[i];
         console.log(post.moverName + ", " + post.moverDescription);
       }
@@ -234,7 +238,7 @@ router.post('/detailedSearchWithoutMC', (req, res) => {
     }).toArray(function(err, totalposts) {
       if (err) throw err;
 
-      for (i = 0; i < totalposts.length; i++) {
+      for (var i = 0; i < totalposts.length; i++) {
         let post = totalposts[i];
         console.log(post.moverName + ", " + post.moverDescription);
       }
@@ -260,7 +264,7 @@ router.post('/detailedSearch', (req, res) => {
     }).toArray(function(err, totalposts) {
       if (err) throw err;
 
-      for (i = 0; i < totalposts.length; i++) {
+      for (var i = 0; i < totalposts.length; i++) {
         let post = totalposts[i];
         console.log(post.moverName + ", " + post.moverDescription);
       }
@@ -287,7 +291,7 @@ router.post('/detailedSearchWithBothNo', (req, res) => {
     }).toArray(function(err, totalposts) {
       if (err) throw err;
 
-      for (i = 0; i < totalposts.length; i++) {
+      for (var i = 0; i < totalposts.length; i++) {
         let post = totalposts[i];
         console.log(post.moverName + ", " + post.moverDescription);
       }
@@ -308,7 +312,7 @@ router.get('/listAll', (req, res) => {
     nodtst.collection("movers").find({}).toArray(function(err, totalmovers) {
       if (err) throw err;
 
-      for (i = 0; i < totalmovers.length; i++) {
+      for (var i = 0; i < totalmovers.length; i++) {
         let mover = totalmovers[i];
         console.log(mover.moverDescription + ", " + mover.moverDescription);
       }

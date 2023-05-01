@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon start"
+    "start": "nodemon start",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.19",
     "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.39.0"
   }
 }
